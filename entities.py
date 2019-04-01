@@ -50,13 +50,15 @@ class EntityManadger():
                 entity2 = toCheck[e2]
                 if entity.boundingBox.isColliding(entity2.boundingBox):
                     if isinstance(entity, Racoon) and isinstance(entity2, Food):
-                        entity2.disabled = True
-                        entity.player.score += entity2.points
-                        self.deleted_entities.append(e2)
+                        if not entity2.disabled:
+                            entity2.disabled = True
+                            entity.player.score += entity2.points
+                            self.deleted_entities.append(e2)
                     elif isinstance(entity2, Racoon) and isinstance(entity, Food):
-                        entity.disabled = True
-                        entity2.player.score += entity.points
-                        self.deleted_entities.append(e)
+                        if not entity.disabled:
+                            entity.disabled = True
+                            entity2.player.score += entity.points
+                            self.deleted_entities.append(e)
 
 
 class Entity:
