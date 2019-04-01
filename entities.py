@@ -27,10 +27,15 @@ class EntityManadger():
         for e in self.entities:
             self.entities[e].update()
         self.check_collisions()
+        self.deleted_entities
+
+    def deleteEntities(self):
+        for e in self.entities:
+            if self.entities[e].disabled:
+                self.deleted_entities.append(e)
         for e in self.deleted_entities:
             if e in self.entities:
                 del self.entities[e]
-        self.deleted_entities = []
 
 
     def getSpritesForRender(self):
@@ -53,12 +58,12 @@ class EntityManadger():
                         if not entity2.disabled:
                             entity2.disabled = True
                             entity.player.score += entity2.points
-                            self.deleted_entities.append(e2)
+
                     elif isinstance(entity2, Racoon) and isinstance(entity, Food):
                         if not entity.disabled:
                             entity.disabled = True
                             entity2.player.score += entity.points
-                            self.deleted_entities.append(e)
+
 
 
 class Entity:

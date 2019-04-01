@@ -63,6 +63,7 @@ def on_draw():
     printScores()
 
 
+
 def update(dt):
     global spawned_items
     global WIDTH
